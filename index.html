@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-Hant"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1">&lt;title&gt;時間黑洞計算機&lt;/title&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&amp;display=swap" rel="stylesheet" /&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root{--accent:#ffb347;--bg:#35281d;--text:#fff;--btn:#a3ffae;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>*{box-sizing:border-box;margin:0;padding:0;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body{font-family:"Noto Sans TC",sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>background:radial-gradient(circle at 30% 30%,#ffe7d2 0%,#fcb69f 35%,#d18552 65%,var(--bg) 100%);</p>
+<p class="p1"><span class="Apple-converted-space">       </span>color:var(--text);display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:2rem;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h1{font-size:2rem;margin-bottom:1.5rem;letter-spacing:2px;text-align:center;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>#app{width:100%;max-width:480px;background:#5c4634dd;padding:1.5rem 2rem;border-radius:10px;box-shadow:0 0 12px rgba(0,0,0,.4);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.item{display:flex;justify-content:space-between;align-items:center;margin:1rem 0;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.item label{flex:1;margin-right:.8rem;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.item input{width:80px;padding:.3rem;text-align:center;border-radius:6px;border:none;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button{width:100%;padding:1rem;font-size:1.1rem;border:none;border-radius:6px;background:var(--accent);color:#000;cursor:pointer;margin-top:1.3rem;font-weight:700;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>#result{margin-top:1.5rem;font-size:1.2rem;text-align:center;display:none;}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;時間黑洞計算機&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="app"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- 這裡動態插入輸入欄 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// 讀取外部活動設定</p>
+<p class="p1"><span class="Apple-converted-space">  </span>fetch('activities.json')</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.then(r=&gt;r.json())</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.then(init)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.catch(()=&gt;document.getElementById('app').textContent='⚠︎ 無法載入活動設定！');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function init(data){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const app=document.getElementById('app');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// 動態產生輸入欄</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data.forEach(({id,label,unit})=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const div=document.createElement('div');div.className='item';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>div.innerHTML=`&lt;label for="${id}"&gt;${label}&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;input id="${id}" type="number" min="0" max="24" step="0.5" placeholder="0"&gt; &lt;span&gt;${unit}&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>app.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// 按鈕</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const btn=document.createElement('button');btn.textContent='計算蒸發日子';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const result=document.createElement('div');result.id='result';app.appendChild(btn);app.appendChild(result);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>btn.onclick=()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let totalHours=0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>data.forEach(({id})=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const v=parseFloat(document.getElementById(id).value)||0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>totalHours+=v;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const yearHours=totalHours*365;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const lostDays=(yearHours/24).toFixed(1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>result.style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>result.innerHTML=`😱 我一年竟然「蒸發」了 &lt;strong&gt;${lostDays}&lt;/strong&gt; 天！`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
